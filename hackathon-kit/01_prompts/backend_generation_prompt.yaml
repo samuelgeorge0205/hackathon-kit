@@ -1,0 +1,85 @@
+# backend_generation_prompt.yaml
+#
+# Fill in every <BRACKET> from 00_triage_worksheet.md, then paste to
+# Claude/your AI coding agent (chat, Claude Code, or via Spec Kit's
+# /specify + /plan -- see spec_kit_templates.md for that flow).
+
+context:
+  problem_statement: "<ONE-SENTENCE PROBLEM>"
+  reference_architecture: >
+    Proven pattern from a previous build: reuse the SHAPE below,
+    replace the domain logic. Do not redesign the architecture from
+    scratch.
+
+required_architecture:
+  root_files:
+    - "config.py -- centralized provider config, reuse near-verbatim (domain-agnostic)"
+    - "ssl_patch.py -- reuse verbatim (domain-agnostic)"
+    - "generate_data.py -- synthetic data generator for <ENTITY NAME>, seeded random, writes to data/, ALSO check for real/real-time data sources first (see data_sourcing_priority below)"
+    - "detect_<X>.py -- rule-based detection/classification, no LLM, explainable"
+    - "build_knowledge_base.py -- embeds example precedent records into Chroma"
+
+  agents_package:
+    state.py: "shared TypedDict, fields: <LIST FROM TRIAGE WORKSHEET>"
+    detection_agent.py: "<WHAT IT CLASSIFIES>, rule-based, no LLM"
+    risk_agent.py: "<WHAT IMPACT IT COMPUTES>, graph/lookup, no LLM"
+    retrieval_agent.py: "RAG lookup from the knowledge base"
+    recommendation_agent.py: "the ONE LLM call, grounded in risk + retrieval"
+    escalation_agent.py: "rule-based routing: auto-handle vs escalate"
+    orchestrator.py: "LangGraph StateGraph wiring all 5 in sequence, real conditional edge at escalation"
+
+  api_package:
+    main.py: "FastAPI app, CORS, router registration"
+    schemas.py: "pydantic models, MUST match frontend TypeScript types field-for-field"
+    data_store.py: "loads data, maps to schemas.py shapes, in-memory mutable state"
+    routers:
+      - "one per screen from the API contract"
+      - "REQUIRED: copilot.py -- AI assistant chatbot endpoint, see chatbot_requirements below"
+      - "REQUIRED: auth.py or persona.py -- persona/role list + selection, see login_requirements below"
+
+data_sourcing_priority:
+  order:
+    1: "real dataset provided by the event/problem statement"
+    2: "free public API or open dataset for the domain (gov open data, Kaggle, relevant REST API)"
+    3: "synthetic/generated data, seeded and realistic, only if 1 and 2 aren't feasible in time"
+  timebox: "don't spend more than 20-30 minutes hunting for real data before falling back to synthetic"
+
+chatbot_requirements:
+  required: true
+  grounding: "same LLM/RAG stack as the main recommendation agent -- not a separate/fake system"
+  endpoint: "POST /api/copilot/chat -- message + conversation history in, grounded response out"
+  context_awareness:
+    required: true
+    rule: >
+      Must accept current dashboard/screen context in the request (or
+      look it up server-side) and use it to (a) ground the chat answer
+      and (b) power a SEPARATE endpoint or response field returning 3-4
+      dynamically generated suggested questions based on live data --
+      not hardcoded strings.
+    suggested_endpoint: "GET /api/copilot/suggested-questions?context=<current screen/entity id>"
+
+login_requirements:
+  required: true
+  type: "persona/role list, not full auth"
+  endpoint: "GET /api/personas -- returns the real user roles for this domain, from the problem statement"
+  scope_note: "no real authentication needed for the demo -- persona selection determining view/data scope is sufficient"
+
+critical_constraints:
+  - "Every LLM/embedding client reads gateway URL, model, key from config.py -- never hardcoded inline. Provider switching must be a one-line env var change."
+  - "If using langchain_openai.OpenAIEmbeddings against an OpenAI-compatible LOCAL endpoint (Ollama etc.), MUST pass check_embedding_ctx_length=False or embedding calls fail with a 400 'invalid input type' error."
+  - "os.makedirs('data', exist_ok=True) at the top of any script writing to data/ -- never assume the folder exists."
+  - "Every pydantic response model in schemas.py must exactly match a TypeScript interface on the frontend, field-for-field, camelCase on both sides."
+  - "CORS allowlist must include whatever port the frontend dev server ACTUALLY uses -- check vite.config.ts, don't assume a default."
+  - "Cap any live/on-demand agent run triggered from the UI (e.g. 'explain reasoning' for ONE item) -- never let a button click trigger an unbounded/multi-minute LLM loop during a demo."
+
+execution_instructions:
+  step_1: "Confirm the 5-agent split for THIS domain -- restate it back in one line per agent"
+  step_2: "Generate agents/state.py first -- the data contract everything depends on"
+  step_3_order:
+    - generate_data.py
+    - detect_<X>.py
+    - the 5 agent files
+    - orchestrator.py
+    - schemas.py
+    - api/main.py + routers (including copilot.py and persona endpoint)
+  step_4: "After each file, give the exact run command and expected output -- confirm before moving to the next file"

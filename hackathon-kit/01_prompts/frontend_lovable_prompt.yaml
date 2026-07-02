@@ -1,0 +1,93 @@
+# frontend_lovable_prompt.yaml
+#
+# Fill in every <BRACKET> from 00_triage_worksheet.md, then paste the
+# whole YAML block (comments and all -- Lovable reads it fine as
+# structured instruction) as your first message to Lovable.
+
+project:
+  name: "<PRODUCT NAME>"
+  one_line_description: "<WHAT IT DOES, ONE SENTENCE>"
+  target_user_persona: "<SPECIFIC ROLE, e.g. 'Fraud Analyst', not 'user'>"
+  core_problem: "<1-2 SENTENCES, FROM THE PROBLEM STATEMENT>"
+  judged_on: [working_functionality, creativity_and_originality, clarity_in_2min_demo]
+
+hard_constraints:
+  theme:
+    mode: dark_only
+    background: "near-black, e.g. #0a0a0a-#111318 range, never pure light mode"
+    accent_color: "<PICK ONE COLOR THAT FITS THE DOMAIN -- not default purple/violet>"
+  originality:
+    forbid: [generic_hero_plus_3_cards, lorem_ipsum_anywhere, default_ai_startup_gradient,
+             "any layout reusable unchanged for a different hackathon problem"]
+    require: "every layout/copy/color choice justified by THIS specific domain"
+  tech:
+    framework: "React + TypeScript (Vite)"
+    data_fetching: "@tanstack/react-query, queryClient set up at app root even though data starts mocked"
+    do_not: "invent backend logic or fake AI reasoning -- build against the mock shapes below only"
+
+data_contract:
+  note: "Paste your triage worksheet section 4 here as real TypeScript interfaces"
+  example: |
+    export interface Entity {
+      id: string;
+      // fields from triage worksheet, exact types
+    }
+    export interface KPIs { }
+    export interface ExecutiveSummary {
+      text: string;
+      confidence: number;
+      generatedAt: string;
+    }
+  location: "src/lib/mock-data.ts -- becomes the fallback data source later, not deleted"
+
+required_components:
+  screens:
+    - name: "<SCREEN 1 FROM TRIAGE WORKSHEET>"
+      primary_action: "<WHAT A JUDGE SHOULD IMMEDIATELY UNDERSTAND HOW TO DO>"
+      states_needed: [loading, empty, error_graceful]
+    - name: "<SCREEN 2>"
+      primary_action: "<...>"
+      states_needed: [loading, empty, error_graceful]
+
+  ai_assistant_chatbot:
+    required: true
+    placement: "persistent slide-out or docked panel, accessible from EVERY screen, not one page"
+    behavior: "Real chat interface calling a backend endpoint (mocked for now, matching the shape below). Must NOT be decorative/static."
+    context_aware_suggestions:
+      required: true
+      rule: "Show 3-4 suggested questions GENERATED from whatever data is currently on screen (e.g. references the actual highest-risk item visible right now), not a hardcoded generic list. Mock this by deriving suggestions from the mock data currently loaded."
+    mock_shape: |
+      interface CopilotMessage {
+        role: "user" | "ai";
+        text: string;
+        sources?: string[];
+        confidence?: number;
+      }
+
+  login_persona_screen:
+    required: true
+    type: "persona/role-select screen, NOT generic email+password"
+    personas: "<LIST THE REAL USER ROLES FROM THE PROBLEM STATEMENT>"
+    behavior: "selecting a persona routes to a view tailored to that role's permissions/data if personas differ meaningfully; otherwise a single realistic persona is fine"
+    real_auth_needed: false
+
+  dashboards_and_charts:
+    rule: "every chart answers a specific question the persona actually has -- no filler charts"
+    bar: "should look like a paid product, not a template"
+
+wow_moment:
+  description: "<PASTE FROM TRIAGE WORKSHEET SECTION 5>"
+  design_note: "make this visually unmistakable -- don't bury it in a generic layout"
+
+exclude:
+  - real_authentication_backend
+  - unnecessary_settings_or_admin_screens
+  - pagination_for_data_volumes_we_dont_have
+
+wiring_readiness:
+  rule: "Each screen's data access should be ONE hook call at the top of the component, not scattered mock-data imports through the JSX -- so wiring to a real API later is a mechanical swap per component, not a rewrite."
+
+first_response_must_include:
+  - confirmation_of_page_structure_and_component_plan
+  - fully_scaffolded_app_with_mock_data_wired_in_and_clickable
+  - clear_comments_marking_where_each_screens_data_hook_lives

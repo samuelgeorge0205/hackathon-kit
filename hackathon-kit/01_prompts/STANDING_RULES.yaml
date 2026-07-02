@@ -1,0 +1,95 @@
+# STANDING_RULES.yaml
+#
+# Paste this block BEFORE every prompt you give to any AI tool tomorrow
+# (Lovable, ChatGPT, Claude, Claude Code) -- frontend prompts, backend
+# prompts, data prompts, everything. It's short on purpose so it's cheap
+# to repeat every time. This is the source of truth these rules were
+# merged from into 01_prompts/frontend_lovable_prompt.yaml and
+# backend_generation_prompt.yaml already -- paste this too anyway, for
+# any ad-hoc prompt outside those two templates.
+
+non_negotiable_rules:
+
+  originality:
+    rule: >
+      Never produce a generic/default-looking scaffold. No centered-hero
+      plus 3-feature-cards layout, no default shadcn/Tailwind starter
+      look, no placeholder Lorem Ipsum, no generic AI-startup purple
+      gradient. Every design decision (layout, copy, color accent,
+      component choice) must be justified by THIS specific problem
+      domain, not reusable across a different hackathon problem
+      unchanged.
+    check: "Could this exact screen be shown for a totally different
+      problem statement without anyone noticing? If yes, it's too
+      generic -- redo it."
+
+  theme:
+    rule: "Dark theme, black/near-black background, always. No light mode."
+    detail: >
+      Base background near-black (not pure #000 -- use a very dark
+      neutral, e.g. #0a0a0a to #111318 range), high-contrast text, one
+      deliberate accent color tied to the domain (not default purple).
+
+  ai_assistant_chatbot:
+    rule: >
+      Every build MUST include a real, working AI assistant chatbot
+      interface -- not decorative, not a static FAQ. It must call the
+      actual backend (same LLM/RAG grounding as the main pipeline), and
+      appear as a persistent, easily accessible panel (slide-out or
+      docked) on every dashboard screen, not just one page.
+    context_awareness: >
+      The chatbot must be aware of the CURRENT dashboard state (whatever
+      screen/data the user is looking at right now) and offer 3-4
+      SUGGESTED QUESTIONS generated FROM that live context -- not a
+      hardcoded static list. E.g. if the highest-risk alert right now is
+      about Supplier X, one suggested question should reference Supplier
+      X specifically, not a generic "ask me anything" prompt.
+    see_template: "02_architecture_templates/api/routers/copilot_template.py"
+
+  data_sourcing:
+    rule: >
+      Before defaulting to synthetic/generated data, ACTIVELY CHECK for
+      real or real-time data related to the problem domain. Priority
+      order:
+        1. Real dataset provided by the event/problem statement
+        2. A free public API for the domain (government open data,
+           Kaggle, a relevant public REST API) -- even a small real
+           sample beats fully synthetic data for credibility in Q&A
+        3. Synthetic/generated data, seeded and realistic, ONLY if 1 and
+           2 aren't feasible in the time available
+    tradeoff: >
+      Don't burn more than 20-30 minutes hunting for real data before
+      falling back to synthetic -- this is a time-boxed check, not a
+      blocker. If real data needs cleaning that eats the time budget,
+      fall back to synthetic and say so honestly in Q&A.
+
+  dashboards:
+    rule: >
+      Every dashboard/graph must be MEANINGFUL, not decorative -- every
+      chart should answer a specific question the target user actually
+      has, and be labeled clearly enough that it makes sense without a
+      verbal explanation. No filler charts included just to fill space.
+    visual_bar: "Should look like a real product a company would pay
+      for, not a hackathon template."
+
+  login_and_personas:
+    rule: >
+      Include a login/entry screen that is SPECIFIC to who actually uses
+      this app in the given problem domain -- not a generic
+      email+password form. Identify the real user persona(s) from the
+      problem statement (e.g. "Operations Manager", "Fraud Analyst",
+      "Triage Nurse") and reflect that in the login screen's framing,
+      and if there are multiple distinct personas with different views,
+      let login determine which view/permissions they see.
+    scope_note: >
+      This does NOT need real authentication/security for a hackathon
+      demo -- a role-select or persona-select screen that then routes to
+      a tailored dashboard view is sufficient and faster to build than
+      real auth, and still satisfies the requirement visually and
+      functionally for the demo.
+
+  prompt_format:
+    rule: >
+      Any prompt Claude (or ChatGPT) hands back to you for use with
+      another AI tool should be given in YAML, not prose paragraphs --
+      easier to scan, edit, and paste consistently under time pressure.
