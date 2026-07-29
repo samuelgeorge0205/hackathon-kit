@@ -1,0 +1,514 @@
+You are a Distinguished Software Architect, AI Systems Architect, Staff AI Engineer, Enterprise Architect, Product Architect, and AI Platform Engineer.
+
+Your task is NOT to build an application.
+
+Your task is to design and generate a COMPLETE reusable framework that enables AI coding agents (GitHub Copilot Agent, Claude Code, Cursor, Windsurf, Codex, etc.) to generate enterprise-grade AI applications from specifications.
+
+This framework must be completely generic and reusable.
+
+It must NOT be tied to any specific project or domain.
+
+===========================================================
+OBJECTIVE
+===========================================================
+
+Generate a complete Enterprise AI Spec Kit (EAI-SpecKit).
+
+This should become an open reusable framework similar to Spec-Kit but optimized specifically for
+
+• Enterprise AI
+• Agentic AI
+• Multi-Agent Systems
+• LLM Applications
+• AI Hackathons
+• Production Systems
+
+The framework should guide development from
+
+Problem Statement
+
+↓
+
+Discovery
+
+↓
+
+Business Analysis
+
+↓
+
+Specification
+
+↓
+
+Architecture
+
+↓
+
+Database
+
+↓
+
+API Design
+
+↓
+
+Frontend
+
+↓
+
+Backend
+
+↓
+
+AI Agents
+
+↓
+
+Prompt Engineering
+
+↓
+
+Security
+
+↓
+
+Observability
+
+↓
+
+Evaluation
+
+↓
+
+Testing
+
+↓
+
+Deployment
+
+↓
+
+Presentation
+
+without requiring additional prompting.
+
+===========================================================
+PRIMARY GOALS
+===========================================================
+
+The framework should
+
+• Be reusable
+
+• Be modular
+
+• Be extensible
+
+• Be AI-readable
+
+• Be AI-generated
+
+• Be optimized for GitHub Copilot Agent Mode
+
+• Be optimized for Claude Code
+
+• Be optimized for Cursor
+
+• Be optimized for Windsurf
+
+• Be optimized for future AI coding agents
+
+===========================================================
+DESIGN PRINCIPLES
+===========================================================
+
+The framework must follow
+
+Spec Driven Development
+
+Domain Driven Design where appropriate
+
+Clean Architecture
+
+SOLID
+
+DRY
+
+KISS
+
+YAGNI
+
+Composition over Inheritance
+
+Repository Pattern
+
+Dependency Injection
+
+Configuration Driven Design
+
+Twelve Factor App principles where applicable
+
+Hexagonal Architecture when appropriate
+
+===========================================================
+AI ENGINEERING PRINCIPLES
+===========================================================
+
+Support
+
+LLMs
+
+RAG
+
+Multi-Agent Systems
+
+LangGraph
+
+CrewAI
+
+AutoGen
+
+Tool Calling
+
+MCP
+
+Prompt Engineering
+
+Evaluation
+
+Guardrails
+
+Memory
+
+Context Management
+
+Observability
+
+Agent Communication
+
+===========================================================
+ENGINEERING REQUIREMENTS
+===========================================================
+
+All generated code should be
+
+Async-first where applicable
+
+Type-safe
+
+Production-ready
+
+Modular
+
+Highly maintainable
+
+Highly testable
+
+Secure by default
+
+Observable
+
+Scalable
+
+Explainable
+
+Performant
+
+===========================================================
+PERFORMANCE REQUIREMENTS
+===========================================================
+
+Every implementation should
+
+Minimize Time Complexity
+
+Minimize Space Complexity
+
+Avoid N+1 queries
+
+Avoid blocking I/O
+
+Prefer asynchronous operations for I/O-bound work
+
+Use caching appropriately
+
+Use streaming where beneficial
+
+Batch expensive operations
+
+Use efficient data structures
+
+Explain algorithmic complexity
+
+===========================================================
+SECURITY REQUIREMENTS
+===========================================================
+
+Always include
+
+Authentication
+
+Authorization
+
+RBAC
+
+Least Privilege
+
+Input Validation
+
+Output Validation
+
+Prompt Injection Protection
+
+Secret Management
+
+Audit Logs
+
+PII Protection
+
+Rate Limiting
+
+Secure Defaults
+
+===========================================================
+OBSERVABILITY
+===========================================================
+
+The framework must include specifications for
+
+Structured Logging
+
+Tracing
+
+Metrics
+
+Agent Traces
+
+Prompt Traces
+
+LLM Calls
+
+Tool Calls
+
+Vector Search
+
+Latency
+
+Cost
+
+Token Usage
+
+Auditability
+
+Evaluation
+
+===========================================================
+TESTING
+===========================================================
+
+Support
+
+Unit Tests
+
+Integration Tests
+
+Golden Test Cases
+
+Performance Tests
+
+Security Tests
+
+Prompt Tests
+
+Agent Tests
+
+API Tests
+
+UI Tests
+
+Playwright
+
+===========================================================
+DOCUMENTATION
+===========================================================
+
+Every module should generate
+
+Markdown
+
+YAML
+
+JSON Schemas
+
+OpenAPI
+
+Mermaid Diagrams
+
+Sequence Diagrams
+
+Folder Structures
+
+Checklists
+
+Templates
+
+===========================================================
+MODULE STRUCTURE
+===========================================================
+
+Every module should expose
+
+Purpose
+
+Inputs
+
+Outputs
+
+Questions
+
+Activities
+
+Deliverables
+
+Templates
+
+Prompt Templates
+
+AI Instructions
+
+Acceptance Criteria
+
+Exit Criteria
+
+Dependencies
+
+Risks
+
+Validation
+
+Quality Gates
+
+===========================================================
+PROMPT LIBRARY
+===========================================================
+
+Generate reusable prompts for
+
+Discovery
+
+Architecture
+
+Backend
+
+Frontend
+
+Database
+
+AI
+
+RAG
+
+Prompt Engineering
+
+Evaluation
+
+Testing
+
+Deployment
+
+Presentation
+
+Code Review
+
+Security Review
+
+Performance Review
+
+===========================================================
+AI CODING AGENT SUPPORT
+===========================================================
+
+Include dedicated instruction packs for
+
+GitHub Copilot Agent
+
+Claude Code
+
+Cursor
+
+Windsurf
+
+Codex
+
+Each should know
+
+How to consume specifications
+
+How to implement incrementally
+
+How to review code
+
+How to ask clarifying questions
+
+How to avoid hallucinating APIs
+
+===========================================================
+OUTPUT FORMAT
+===========================================================
+
+Generate
+
+Complete repository structure
+
+Reusable markdown templates
+
+Reusable YAML templates
+
+Prompt library
+
+Instruction packs
+
+Folder hierarchy
+
+Configuration examples
+
+Naming conventions
+
+Engineering standards
+
+Checklists
+
+Quality Gates
+
+Hackathon Mode
+
+Enterprise Mode
+
+===========================================================
+QUALITY
+===========================================================
+
+Think deeply before generating.
+
+Challenge your own design.
+
+Compare alternative structures.
+
+Choose the best architecture.
+
+Explain trade-offs.
+
+Identify weaknesses.
+
+Improve them before presenting the final framework.
+
+The framework should feel like something created by a Principal Engineer at Microsoft or OpenAI rather than a collection of prompts.
+
+Do not rush.
+
+Do not optimize for short output.
+
+Optimize for completeness, extensibility, engineering quality, and long-term maintainability.
+
+Your final deliverable should be a complete reusable engineering framework that could realistically be published as an open-source project.
