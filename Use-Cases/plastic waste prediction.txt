@@ -1,0 +1,52 @@
+Title:
+Plastics Waste Prediction and Sustainability Insights Tool
+
+Problem Statement:
+Retail supply chains generate significant volumes of plastics packaging waste across suppliers, manufacturing, warehouses and stores, yet retailers have limited visibility into how much is produced at each stage. Packaging data held by suppliers is frequently incomplete or unavailable due to system and integration limitations, forcing teams to rely on manual estimates that are slow, inconsistent, and difficult to act upon. Without a reliable view of plastics usage, handling effort and associated cost, retailers cannot identify high-wastage areas, optimize packaging decisions or evidence of progress against sustainability commitments.
+
+Data Requirements (Guidance):
+Domain-specific datasets including purchase orders, product and packaging specifications, supplier manufacturing records, warehouse and store stock receipts, and unpackaging activity logs. Data should capture plastics type, weight, dimensions, quantities ordered and handling effort across supply chain locations. Synthetic data may be used to simulate supplier gaps and wastage scenarios. Compliance with retail data governance required.
+(Feel free to generate synthetic data as well from the provided access)
+
+Expected Output/ Demonstration of Solution:
+A production-ready AI tool that predicts plastics waste volume, handling cost and effort at each stage of the retail supply chain, and surfaces actionable reduction opportunities to sustainability and supply chain teams. Includes comprehensive documentation and testing. Business benefits include reduced packaging waste, lower handling cost and stronger sustainability reporting.
+Be creative to go beyond as you solve the above needs
+
+
+(Consider the below based on the appropriate use cases and treat as a Guideline)
+
+User Experience and Interface:
+• Create intuitive and user-friendly interfaces that support the specific workflow requirements
+• Implement personalized hybrid use experiences (conversation and/or visualization) with appropriate context, tonality and flexibility aligned with the required user journey
+
+Data Architecture and Processing:
+• Ensure data quality, completeness, and proper processing as appropriate for the need. This may include optimal context based retrieval
+• Implement appropriate data storage solutions (both structured and unstructured as appropriate) that can handle the volume and variety of required datasets. Have cohesiveness among generated data sets
+• Consider data aggregation, correlation, and summarization techniques relevant to the use case
+
+Core AI Solution Design:
+• Focus on pragmatic short to medium solution roadmap
+• Design the solution with appropriate levels of autonomy while maintaining human oversight
+• Implement adaptability (or learning capabilities) based on user feedback and changing requirements
+• Ensure proper grounding, references, and contextual customization for accurate and relevant Outputs. Similarly consider having Guardrails in your design, intent is to have a layer. For e.g.: Screening and Preventing sensitive data being sent to LLM.
+• Discourage LLM's foundation learning to make decisions or recommendations for your needs. Provide clear explanations and reasoning and confidence levels in AI-generated results.
+
+Technical Implementation:
+• Design a robust multi-tier and modular architecture that supports scalability and maintainability.
+• Implement appropriate memory management, caching and token usage strategy (Context Engg)
+• Ensure framework independency and configurability for future adaptability
+• Include appropriate security controls, privacy protection, and audit logging
+• Have rationale for choice of solution design vis a vis alternatives considered
+
+Testing and Quality Assurance:
+• Develop appropriate test scenarios that cover various use case conditions justifying the need
+• Ensure test data completeness and variety to validate solution robustness.
+• Implement automated testing processes for continuous quality validation where appropriate
+
+Demo:
+• Plan for thorough demo scenarios that effectively showcase the solution capabilities with appropriate and adequate input data (both volume and quality)
+• Explain the design options considered and rationale for design
+• Prepare to explain and walk through code and execution scenarios (Clean Code)
+• Show your readiness to demonstrate with dynamic data inputs
+• Show how AI/Gen AI made the difference to solution.
+• All team members ability to explain full solution flow and answer questions related to design
